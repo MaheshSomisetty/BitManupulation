@@ -1,0 +1,15 @@
+import java.util.*;
+public class xor {
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc=new Scanner(System.in);
+		int a=sc.nextInt(), b=sc.nextInt();
+		for(int i=31; i>=0; i--) {
+			int m=1<<i;
+			if(((a&m)==0 && (b&m)>0) || ((a&m)>0 && (b&m)==0)) {
+				System.out.println((m<<1)-1);
+				break;
+			}
+		}
+	}
+}
