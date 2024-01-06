@@ -1,0 +1,21 @@
+class Solution {
+    public int minOperations(int[] nums, int k) {
+        int a=0,c=0;
+        for(int i=0;i<nums.length;i++)
+        {
+            a^=nums[i];
+        }
+        int b=(int)(Math.log(a)/Math.log(2));
+        int z=(int)(Math.log(k)/Math.log(2));
+        b=Math.max(b,z);
+        for(int i=b;i>=0;i--)
+        {
+            int h=((1<<i) & a);
+            int d=((1<<i) & k);
+            if((h^d)>0)c+=1;
+            
+        }
+        return c;
+        
+    }
+}
