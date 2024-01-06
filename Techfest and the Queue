@@ -1,0 +1,31 @@
+class Solution {
+    public static long sumOfPowers(long a, long b) {
+        // code here
+        long c=0;
+        for(long i=a;i<=b;i++)
+        {
+            long c1=0,n=i,j=2;
+            long c2=0;
+            while(n%j==0)
+            {
+                n/=j;
+                c2++;
+            }
+            c1+=c2;
+            for(j=3;j<=(int)Math.sqrt(i)+1;j+=2)
+            {
+                c2=0;
+                while(n%j==0)
+                {
+                    n/=j;
+                    c2++;
+                }
+                c1+=c2;
+            }
+            if(n>2) c++;
+            c+=c1;
+        }
+        return c;
+    }
+}
+    
