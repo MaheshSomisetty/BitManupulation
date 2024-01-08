@@ -1,0 +1,7 @@
+a=int(input())
+b=list(map(int,input().split()))
+c=int(input())
+d=list(map(int,input().split()))
+b=set(b)
+d=set(d)
+print(*sorted(list(b.union(d))))
