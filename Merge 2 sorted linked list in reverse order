@@ -1,0 +1,38 @@
+class GfG
+{
+    Node reverse(Node head)
+    {
+        Node prev=null,next;
+        while(head!=null)
+        {
+            next=head.next;
+            head.next=prev;
+            prev=head;
+            head=next;
+        }
+        return prev;
+    }
+    Node mergeResult(Node temp1, Node temp2)
+    {
+	    // Your code here
+	    Node ans=new Node(-1);
+	    Node temp=ans;
+	    while(temp1!=null && temp2!=null)
+	    {
+	        if(temp1.data<temp2.data)
+	        {
+	            ans.next=temp1;
+	            temp1=temp1.next;
+	        }
+	        else
+	        {
+	            ans.next=temp2;
+	            temp2=temp2.next;
+	        }
+	        ans=ans.next;
+	    }
+	    if(temp1!=null)ans.next=temp1;
+	    else ans.next=temp2;
+	    return reverse(temp.next);
+    }
+}
