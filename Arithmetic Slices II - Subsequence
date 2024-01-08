@@ -1,0 +1,19 @@
+class Solution {
+    public int numberOfArithmeticSlices(int[] nums) {
+        int ans=0;
+        long diff;
+        ArrayList<HashMap<Long, Integer>> maps=new ArrayList<>();
+        for(int i=0; i<nums.length; i++) maps.add(new HashMap<>());
+        for(int i=1; i<nums.length; i++) {
+            for(int j=0; j<i; j++) {
+                diff = (nums[i]*1L)-(nums[j]*1L);
+                if(diff <= Integer.MIN_VALUE ||  diff >= Integer.MAX_VALUE) continue;
+                int t= maps.get(j).getOrDefault(diff, 0) + maps.get(i).getOrDefault(diff, 0);
+                ans += maps.get(j).getOrDefault(diff, 0);
+                maps.get(i).put(diff, t+1);
+            }
+        }
+        System.out.println(maps);
+        return ans;
+    }
+}
