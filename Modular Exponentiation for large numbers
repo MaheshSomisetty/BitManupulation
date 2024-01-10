@@ -1,0 +1,23 @@
+class Solution
+{
+    public long PowMod(long x, long n, long m)
+    {
+        // Code here
+        long ans=1;
+        while(n!=0)
+        {
+            if((n&1)==1)
+            {
+                n-=1;
+                ans=((ans%m)*(x%m))%m;
+            }
+            else
+            {
+                n/=2;
+                x=((x%m)*(x%m))%m;
+            }
+        }
+        //System.out.println(x+" "+ans);
+        return (ans)%m;
+    }
+}
