@@ -1,0 +1,57 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public void postorder(TreeNode root,HashMap<Integer,ArrayList<Integer>> mp)
+    {
+        if(root==null)return;
+        if(!mp.containsKey(root.val))mp.put(root.val,new ArrayList<Integer> ());
+        if(root.left!=null)mp.get(root.val).add(root.left.val);
+        if(root.right!=null)mp.get(root.val).add(root.right.val);
+        if(root.left!=null && !mp.containsKey(root.left.val))mp.put(root.left.val,new ArrayList<Integer> ());
+        if(root.left!=null)mp.get(root.left.val).add(root.val);
+        if(root.right!=null && !mp.containsKey(root.right.val))mp.put(root.right.val,new ArrayList<Integer> ());
+        if(root.right!=null)mp.get(root.right.val).add(root.val);
+        postorder(root.left,mp);
+        postorder(root.right,mp);
+    }
+    public int amountOfTime(TreeNode root, int start) {
+        HashMap<Integer,ArrayList<Integer>> mp=new HashMap<> ();
+        postorder(root, mp);
+        Queue<Integer> q=new LinkedList();
+        q.add(start);
+        int visited[]=new int[100001],c=0;
+        visited[start]=1;
+        while(!q.isEmpty())
+        {
+            int a=q.size();
+            for(int i=0;i<a;i++)
+            {
+                int poll=q.poll();
+                for(int j=0;j<mp.get(poll).size();j++)
+                {
+                    if(visited[mp.get(poll).get(j)]!=1)
+                    {
+                        visited[mp.get(poll).get(j)]=1;
+                        q.add(mp.get(poll).get(j));
+                    }
+                }   
+            }
+            c++;
+        }
+        System.out.println(mp);
+        return c-1;
+    }
+}
